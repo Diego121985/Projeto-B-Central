@@ -2,16 +2,17 @@
 const convertButton = document.querySelector(".convert-button")
 const euroBr = document.querySelector(".currency-select")
 
-function convertValues() {
+const convertValues = async() => {
 
    const inputCurrencyValue = document.querySelector(".input-currency").value
    const brasil = document.querySelector(".currency-value")
    const outraMoeda = document.querySelector(".currency-value1")
- 
 
-   const dolarToday = 5.2
-   const euroToday = 6.2
+ const data =  await fetch("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL,BTC-BRL").then(response => response.json())
 
+  
+   const euroToday = data.EURBRL.high
+ const dolarToday = data.USDBRL.high
 
 
 
@@ -53,8 +54,9 @@ const currencyImage = document.querySelector(".currency-image")
 
 if(euroBr.value == 'dolar'){
 
-   currencyName.innerHTML = 'Dólar americano'
+   currencyName.innerHTML = 'Dólar Americano'
    currencyImage.src ='./estados-unidos (1) 1.png'
+ 
 }
 
 
@@ -62,6 +64,8 @@ if(euroBr.value == 'euro'){
 
    currencyName.innerHTML = '€ Euro'
    currencyImage.src = './Euro (1).png'
+  
+
 }
 convertValues()
 }
